@@ -5,7 +5,8 @@ const priceMap = {}
 const fetchPowhData = async () => {
   const browser = await puppeteer.launch({
     headless: true,
-    timeout: 60000
+    timeout: 60000,
+    args: ['--no-sandbox']
   });
   const page = await browser.newPage();
   let buyPrice

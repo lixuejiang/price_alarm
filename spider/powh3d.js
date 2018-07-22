@@ -49,7 +49,10 @@ const processData = async (data) => {
     last10mRate = (data.sellPrice - priceMap[last10m].sellPrice) / priceMap[last10m].sellPrice
   }
   priceMap[timestamp] = data
-  if (Math.abs(last1mRate) > 1 || Math.abs(last10mRate) > 5) {
+  console.log(priceMap)
+  console.log(last1mRate)
+  console.log(last10mRate)
+  if (Math.abs(last1mRate) > 0.01 || Math.abs(last10mRate) > 0.05) {
     let msg = `当前买入价格：${data.sellPrice}, 当前卖出价格：${data.sellPrice}\n 卖出价1分钟变化：${last1mRate * 100}%, 卖出价10分钟变化：${last10mRate * 100}%, `
     await sendDingtalkMsg('https://oapi.dingtalk.com/robot/send?access_token=1e7fc7f14ce2524c501212566b46e224a1b11db94fb0c8edf77d0cea18f8f20a', msg)
   }
